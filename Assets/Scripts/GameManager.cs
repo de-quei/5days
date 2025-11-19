@@ -96,8 +96,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void OpenInventory() { inventoryOverlay.SetActive(true); }
-    public void CloseInventory() { inventoryOverlay.SetActive(false); }
+    public void OpenInventory()
+    { 
+        if (inventoryOverlay != null)
+        {
+            inventoryOverlay.SetActive(true);
+        }
+
+        Time.timeScale = 0f;
+    }
+
+    public void CloseInventory()
+    {
+        if (inventoryOverlay != null)
+        {
+            inventoryOverlay.SetActive(false);
+        }
+
+        Time.timeScale = 1f;
+    }
 
     IEnumerator SpawnRoutine()
     {

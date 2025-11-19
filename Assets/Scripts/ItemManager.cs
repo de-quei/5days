@@ -12,8 +12,7 @@ public class ItemManager : MonoBehaviour
 
     IEnumerator LifeCycle()
     {
-
-        yield return new WaitForSeconds(13f);
+        yield return new WaitForSeconds(5f);
 
         if (!isClicked)
         {
@@ -26,11 +25,23 @@ public class ItemManager : MonoBehaviour
     {
         if (isClicked) return;
 
-        isClicked = true;
-        Debug.Log(">>> 획득 성공! 인벤토리에 저장 <<<");
+        GameManager gm = FindObjectOfType<GameManager>();
 
-        // 저장 로직 필요
+        if (gm != null)
+        {
+            string myName = GetComponent<SpriteRenderer>().sprite.name;
 
-        Destroy(gameObject);
+            bool isSuccess = gm.SaveToInventory(myName);
+
+            if (isSuccess)
+            {
+                isClicked = true;
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.Log("가방이 꽉 차서 아이템을 주울 수 없습니다.");
+            }
+        }
     }
 }

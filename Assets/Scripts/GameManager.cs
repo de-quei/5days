@@ -20,10 +20,11 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Grids")]
     public Transform craftingGrid;  
-    public Transform inventoryGrid; 
-
+    public Transform inventoryGrid;
     public GameObject slotPrefab;   
-    public Sprite[] blackItems;     
+    public Sprite[] blackItems;
+
+    public Sprite[] tooltipSprites;
 
     void Start()
     {
@@ -44,18 +45,24 @@ public class GameManager : MonoBehaviour
     {
         foreach (Transform child in craftingGrid) { Destroy(child.gameObject); }
 
-        foreach (Sprite itemImg in blackItems)
+        for (int i = 0; i < blackItems.Length; i++)
         {
             GameObject slot = Instantiate(slotPrefab, craftingGrid);
+            slot.name = "BlackSlot_" + blackItems[i].name;
+
             Image imgComponent = slot.GetComponent<Image>();
             if (imgComponent != null)
             {
-                imgComponent.sprite = itemImg;
+                imgComponent.sprite = blackItems[i];
             }
-            slot.name = "BlackSlot_" + itemImg.name;
+            
+            if (i < tooltipSprites.Length)
+            {
+                SlotTooltipTrigger trigger = slot.AddComponent<SlotTooltipTrigger>();
+                trigger.tooltipSprite = tooltipSprites[i];
+            }
         }
     }
-
     public bool SaveToInventory(string itemName)
     {
         if (inventory.Count >= maxCapacity)

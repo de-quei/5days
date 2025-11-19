@@ -1,6 +1,7 @@
 using System.Collections;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,11 +12,14 @@ public class GameManager : MonoBehaviour
     public float avoidRadius = 1.2f;
 
     public List<string> inventory = new List<string>();
+    public int maxCapacity = 30;
 
-    public int maxCapacity = 5;
+    public Text noticeText;
 
     void Start()
     {
+        if (noticeText != null) noticeText.gameObject.SetActive(false);
+
         StartCoroutine(SpawnRoutine());
     }
 
@@ -54,14 +58,12 @@ public class GameManager : MonoBehaviour
             float x = Random.Range(minX, maxX);
             float y = Random.Range(minY, maxY);
             randomPos = new Vector2(x, y);
-
             attemptCount++;
             if (attemptCount > 100) break;
 
         } while (Vector2.Distance(randomPos, Vector2.zero) < avoidRadius);
 
         GameObject newItem = Instantiate(itemPrefab, randomPos, Quaternion.identity);
-
         SpriteRenderer sr = newItem.GetComponent<SpriteRenderer>();
         if (itemSprites.Length > 0)
         {
@@ -75,12 +77,28 @@ public class GameManager : MonoBehaviour
     {
         if (inventory.Count >= maxCapacity)
         {
-            Debug.Log("인벤토리가 가득 찼습니다! 저장 실패!");
-            return false; 
+            StartCoroutine(ShowNotice("가방이 꽉 찼습니다!", Color.red));
+            return false;
         }
 
         inventory.Add(itemName);
-        Debug.Log($"아이템 저장 완료! [{itemName}] 현재 개수: {inventory.Count}/{maxCapacity}");
+
+        StartCoroutine(ShowNotice($"{itemName}을(를) 획득했습니다!", Color.white));
+
+        Debug.Log($"저장 완료: {itemName}");
         return true;
+    }
+
+    IEnumerator ShowNotice(string message, Color color)
+    {
+
+        noticeText.text = message;
+        noticeText.color = color;
+
+        noticeText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2.0f);
+
+        noticeText.gameObject.SetActive(false);
     }
 }

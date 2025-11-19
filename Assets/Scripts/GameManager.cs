@@ -18,13 +18,41 @@ public class GameManager : MonoBehaviour
 
     public GameObject inventoryOverlay;
 
+    [Header("Inventory UI Settings")]
+    public Transform itemGrid;     
+    public GameObject slotPrefab;   
+    public Sprite[] blackItems;     
+
     void Start()
     {
         if (noticeText != null) noticeText.gameObject.SetActive(false);
-
         if (inventoryOverlay != null) inventoryOverlay.SetActive(false);
 
+        InitInventoryUI();
+
         StartCoroutine(SpawnRoutine());
+    }
+
+    void InitInventoryUI()
+    {
+        foreach (Transform child in itemGrid)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (Sprite itemImg in blackItems)
+        {
+            GameObject slot = Instantiate(slotPrefab, itemGrid);
+
+            Image imgComponent = slot.GetComponent<Image>();
+            if (imgComponent != null)
+            {
+                imgComponent.sprite = itemImg;
+                imgComponent.SetNativeSize(); 
+            }
+
+            slot.name = "Slot_" + itemImg.name;
+        }
     }
 
     public void OpenInventory()

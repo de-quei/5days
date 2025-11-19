@@ -16,11 +16,28 @@ public class GameManager : MonoBehaviour
 
     public Text noticeText;
 
+    public GameObject inventoryOverlay;
+
     void Start()
     {
         if (noticeText != null) noticeText.gameObject.SetActive(false);
 
+        if (inventoryOverlay != null) inventoryOverlay.SetActive(false);
+
         StartCoroutine(SpawnRoutine());
+    }
+
+    public void OpenInventory()
+    {
+        inventoryOverlay.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    
+    public void CloseInventory()
+    {
+        inventoryOverlay.SetActive(false);
+        Time.timeScale = 1;
     }
 
     IEnumerator SpawnRoutine()

@@ -284,7 +284,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 983f34f4ec41adf45a8f2661d2571fe6, type: 3}
   - {fileID: 21300000, guid: 607df9d30dd0aa248bfb652fb72948a9, type: 3}
   - {fileID: 21300000, guid: 7c847942529359c4fb28f3052c1ba28b, type: 3}
-  colorItems:
+  craftingColorItems:
   - {fileID: 21300000, guid: 08114035894957545ae0439e1853f487, type: 3}
   - {fileID: 21300000, guid: 8a08bbaf34865634384ec8a05edf34d9, type: 3}
   - {fileID: 21300000, guid: 2939b61c25a5acc438a20f2919c50b11, type: 3}
@@ -292,8 +292,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 700eae81da75fc34082bc73f01583f92, type: 3}
   - {fileID: 21300000, guid: 8e9ab28c2f92d144b8b7b0d2e79ede3a, type: 3}
   - {fileID: 21300000, guid: a8c49566869db8d42abba1acce0ba35a, type: 3}
-  - {fileID: 21300000, guid: 139309a2ba667c243ae0f4946bf8246e, type: 3}
   - {fileID: 21300000, guid: ba65cd5f5f9590241afd2fc890051095, type: 3}
+  - {fileID: 21300000, guid: 139309a2ba667c243ae0f4946bf8246e, type: 3}
   - {fileID: 21300000, guid: 3a8bbb9b9e08a1249a1e4d58373d0562, type: 3}
   - {fileID: 21300000, guid: 1c79d4205ab83024098135dfb3f3197a, type: 3}
   - {fileID: 21300000, guid: 9305b2560c4a8344cb60678509722eff, type: 3}

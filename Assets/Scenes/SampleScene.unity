@@ -284,6 +284,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 983f34f4ec41adf45a8f2661d2571fe6, type: 3}
   - {fileID: 21300000, guid: 607df9d30dd0aa248bfb652fb72948a9, type: 3}
   - {fileID: 21300000, guid: 7c847942529359c4fb28f3052c1ba28b, type: 3}
+  colorItems:
+  - {fileID: 21300000, guid: 08114035894957545ae0439e1853f487, type: 3}
+  - {fileID: 21300000, guid: 8a08bbaf34865634384ec8a05edf34d9, type: 3}
+  - {fileID: 21300000, guid: 2939b61c25a5acc438a20f2919c50b11, type: 3}
+  - {fileID: 21300000, guid: d4fddb31946268e41b7c5022051d154b, type: 3}
+  - {fileID: 21300000, guid: 700eae81da75fc34082bc73f01583f92, type: 3}
+  - {fileID: 21300000, guid: 8e9ab28c2f92d144b8b7b0d2e79ede3a, type: 3}
+  - {fileID: 21300000, guid: a8c49566869db8d42abba1acce0ba35a, type: 3}
+  - {fileID: 21300000, guid: 139309a2ba667c243ae0f4946bf8246e, type: 3}
+  - {fileID: 21300000, guid: ba65cd5f5f9590241afd2fc890051095, type: 3}
+  - {fileID: 21300000, guid: 3a8bbb9b9e08a1249a1e4d58373d0562, type: 3}
+  - {fileID: 21300000, guid: 1c79d4205ab83024098135dfb3f3197a, type: 3}
+  - {fileID: 21300000, guid: 9305b2560c4a8344cb60678509722eff, type: 3}
   tooltipSprites:
   - {fileID: 21300000, guid: 3c52155afd72a3248b8fd94e7d882486, type: 3}
   - {fileID: 21300000, guid: b31c293282cb4924e8a2203425ad96d3, type: 3}
@@ -297,6 +310,63 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e672b632fb677394d8ac84589f81cfdb, type: 3}
   - {fileID: 21300000, guid: 3768f54cf4866c647949e38c666c8905, type: 3}
   - {fileID: 21300000, guid: 0128a7c64cec9dc49a46adbef5a7b50b, type: 3}
+  craftingRecipes:
+  - resultName: anchor
+    ingredients:
+    - itemName: string
+      amount: 2
+    - itemName: metalPiece
+      amount: 10
+  - resultName: boardGame
+    ingredients:
+    - itemName: hammer
+      amount: 1
+    - itemName: smallStone
+      amount: 20
+  - resultName: clamCup
+    ingredients:
+    - itemName: a
+      amount: 1
+  - resultName: woodenStick
+    ingredients:
+    - itemName: woodenStick
+      amount: 1
+    - itemName: string
+      amount: 1
+    - itemName: fork
+      amount: 1
+  - resultName: flag
+    ingredients:
+    - itemName: clothes
+      amount: 5
+    - itemName: woodenStick
+      amount: 1
+  - resultName: gig
+    ingredients:
+    - itemName: woodenStick
+      amount: 1
+    - itemName: metalPiece
+      amount: 2
+    - itemName: string
+      amount: 1
+  - resultName: 
+    ingredients: []
+  - resultName: net
+    ingredients:
+    - itemName: string
+      amount: 10
+  - resultName: smallStone
+    ingredients:
+    - itemName: 
+      amount: 0
+    - itemName: 
+      amount: 0
+  - resultName: 
+    ingredients: []
+  - resultName: 
+    ingredients: []
+  - resultName: 
+    ingredients: []
 --- !u!1 &339516136
 GameObject:
   m_ObjectHideFlags: 0

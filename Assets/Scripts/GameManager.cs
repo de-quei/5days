@@ -23,8 +23,11 @@ public class GameManager : MonoBehaviour
     public Transform inventoryGrid;
     public GameObject slotPrefab;   
     public Sprite[] blackItems;
+    public Sprite[] colorItems;
 
     public Sprite[] tooltipSprites;
+
+    public CraftingRecipe[] craftingRecipes;
 
     void Start()
     {
@@ -44,7 +47,7 @@ public class GameManager : MonoBehaviour
     void InitCraftingUI()
     {
         foreach (Transform child in craftingGrid) { Destroy(child.gameObject); }
-
+        
         for (int i = 0; i < blackItems.Length; i++)
         {
             GameObject slot = Instantiate(slotPrefab, craftingGrid);
@@ -63,6 +66,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+   
     public bool SaveToInventory(string itemName)
     {
         if (inventory.Count >= maxCapacity)
@@ -72,11 +76,81 @@ public class GameManager : MonoBehaviour
         }
 
         inventory.Add(itemName);
-
         AddSlotToInventoryGrid(itemName);
-
         StartCoroutine(ShowNotice($"{itemName}¿ª(∏¶) »πµÊ«ﬂΩ¿¥œ¥Ÿ!", Color.white));
+
+        CheckCraftableStatus();
+
         return true;
+    }
+
+    void CheckCraftableStatus()
+    {
+        foreach (CraftingRecipe recipe in craftingRecipes)
+        {
+            bool canCraft = true;
+            foreach (Ingredient ing in recipe.ingredients)
+            {
+                int myCount = GetItemCount(ing.itemName);
+
+                if (myCount < ing.amount)
+                {
+                    canCraft = false;
+                    break;
+                }
+            }
+
+            Transform slotTransform = craftingGrid.Find("BlackSlot_" + recipe.resultName);
+            if (slotTransform != null)
+            {
+                Image slotImage = slotTransform.GetComponent<Image>();
+                if (slotImage != null)
+                {
+                    if (canCraft)
+                    {
+                        slotImage.sprite = GetColorSprite(recipe.resultName);
+                    }
+                    else
+                    {
+                        slotImage.sprite = GetBlackSprite(recipe.resultName);
+                    }
+                }
+            }
+        }
+    }
+
+    int GetItemCount(string targetName)
+    {
+        int count = 0;
+        foreach (string item in inventory)
+        {
+            if (item == targetName) count++;
+        }
+        return count;
+    }
+
+    Sprite GetColorSprite(string name)
+    {
+        foreach (Sprite s in colorItems)
+        {
+            if (s.name == name) return s;
+        }
+
+        foreach (Sprite s in itemSprites)
+        {
+            if (s.name == name) return s;
+        }
+
+        return null;
+    }
+
+    Sprite GetBlackSprite(string name)
+    {
+        foreach (Sprite s in blackItems)
+        {
+            if (s.name == name) return s;
+        }
+        return null;
     }
 
     void AddSlotToInventoryGrid(string itemName)
@@ -171,4 +245,19 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         noticeText.gameObject.SetActive(false);
     }
+}
+
+[System.Serializable]
+public struct Ingredient
+{
+    public string itemName; 
+    public int amount;     
+}
+
+
+[System.Serializable]
+public struct CraftingRecipe
+{
+    public string resultName;        
+    public Ingredient[] ingredients; 
 }
